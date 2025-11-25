@@ -15,9 +15,9 @@ from functools import lru_cache
 @lru_cache(maxsize=None)
 def get_coordinates(city, country):
     try:
-        geolocator = Nominatim(user_agent="dev_event_sorter_v1")
+        geolocator = Nominatim(user_agent="EventSorter2", timeout=2)
         location = geolocator.geocode(f"{city}, {country}")
-        time.sleep(0.8)
+        time.sleep(1.2)
         if location:
             return (location.latitude, location.longitude)
         else:
