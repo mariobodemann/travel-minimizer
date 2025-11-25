@@ -73,15 +73,17 @@ def find_best_events(years, advocates, excludes, maximum):
         print(f"{i+1: 5d} / {len(events)}({int((float(i)/len(events))*100) :02d}%): ", end="")
         
         try:
-            print(event['name'])
+            print(event['name'], end=': ')
             event_city = event.get('city')
             event_country = event.get('country')
 
             if not event_city or not event_country:
+                print()
                 continue
 
             event_coords = get_coordinates(event_city, event_country)
             if not event_coords:
+                print()
                 continue
 
             total_distance = 0
@@ -95,11 +97,13 @@ def find_best_events(years, advocates, excludes, maximum):
                 events_with_distances.append({
                     'name': event.get('name'),
                     'city': event_city,
+                    'link': event.get('hyperlink'),
                     'country': event_country,
                     'total_distance': total_distance,
                     'individual_distances': individual_distances,
                     'meta': event,
                 })
+            print(total_distance)
         except (ValueError, TypeError) as e:
             # skip events with malformed data
             print(event)
@@ -119,6 +123,7 @@ def find_best_events(years, advocates, excludes, maximum):
         print(f"{i+1}. {event['name']}")
         print(f"   Location: {event['city']}, {event['country']}")
         print(f"   Date: {datetime.fromtimestamp(event['meta']['date'][0]/1000)}")
+        print(f"   Link: {event['link']}")
         print(f"   ∑ Travel: {event['total_distance']:,.0f} km")
         for dist in event['individual_distances']:
             print(f"     - {dist['name']:10s}: {dist['distance']:,.0f} km ({dist['distance'] * 0.6213712:,.0f} mi)")
