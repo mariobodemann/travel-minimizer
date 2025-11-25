@@ -1,7 +1,7 @@
 MINIMIZER - Minimize your travel distances
 ==========================================
 
-> /minimizer.py --years 2027 --advocates 'mario:Berlin:Germany' --max 3 --exclude 'USA,France,Germany,Voxxed,Droidcon,User,Money'
+> ./minimizer.py --years 2027 --advocates 'mario:Berlin:Germany' --max 3 --exclude 'USA,France,Germany,Voxxed,Droidcon,User,Money'
 
 
 Output:
